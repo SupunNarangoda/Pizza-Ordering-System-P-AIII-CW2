@@ -301,20 +301,32 @@ public class Main {
         }
     }
     private static String handleSelection(Scanner scanner, String[] options) {
-        int choice;
+        int choice = -1;
+
         while (true) {
+            System.out.println("Please select one of the following options:");
+            for (int i = 0; i < options.length; i++) {
+                System.out.println((i + 1) + ". " + options[i]);
+            }
             System.out.print("Enter the number of your choice: ");
+
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
+
+
                 if (choice > 0 && choice <= options.length) {
-                    return options[choice - 1];
+                    String selectedOption = options[choice - 1];
+                    System.out.println("Great choice! You selected: " + selectedOption + "\n");
+                    return selectedOption;
                 } else {
-                    System.out.println("Invalid choice. Please select a number between 1 and " + options.length + ".");
+                    System.out.println("Oops! That number doesn't match any option. Please try again.");
                 }
             } else {
-                System.out.println("Invalid input. Please enter a valid number.");
+                System.out.println("Hmm, that doesn't look like a number. Please enter a number from the list.");
                 scanner.next();
             }
+
+            System.out.println();
         }
     }
 
