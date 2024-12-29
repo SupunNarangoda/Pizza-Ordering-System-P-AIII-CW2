@@ -34,7 +34,7 @@ public class OrderCommand implements Command {
                 loyaltyPointsUsed = Math.min(loyaltyProgram.getPoints(), (int) order.getPizza().getCost());
                 loyaltyProgram.addPoints(-loyaltyPointsUsed); // Deduct points
             }
-            // Calculate final cost after applying loyalty points
+            // Calculates the final cost after applying loyalty points
              finalCost = order.getPizza().getLoyaltyCost(loyaltyPointsUsed,order.getPizza().getCost());
             System.out.println("Final Cost after applying loyalty points: $" + finalCost);
         }else{
@@ -61,12 +61,8 @@ public class OrderCommand implements Command {
         System.out.println("Order placed successfully for: " + order.getPizza().getDescription());
 //        order.setStatus("Placed");
 
-//         Update loyalty points
         loyaltyProgram.addPoints((int) order.getPizza().getCost());
         System.out.println("Loyalty points added. Total points: " + loyaltyProgram.getPoints());
-
-
-        // Simulate order progress
 
     }
 

@@ -55,7 +55,6 @@ public class SubmitFeedbackCommand implements Command {
     public void undo() {
         Feedback feedbackToRemove = null;
 
-        // Find the feedback for the given order's pizza
         for (Feedback feedback : feedbackManager.getFeedbackList()) {
             if (feedback.getPizza().equals(order.getPizza()) && feedback.getDescription().equals(feedbackDescription)) {
                 feedbackToRemove = feedback;

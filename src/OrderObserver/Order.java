@@ -9,38 +9,33 @@ import java.util.Observer;
 
 public class Order {
     private List<OrderObserver> observers = new ArrayList<>();
-    private OrderState state; // Current state
+    private OrderState state;
     private Pizza pizza;
 
     public Order(Pizza pizza) {
         this.pizza = pizza;
-        this.state = new PlacedState(); // Initial state
+        this.state = new PlacedState();
     }
 
-    // Add an observer to the list
     public void addObserver(OrderObserver observer) {
         observers.add(observer);
     }
 
-    // Remove an observer from the list
     public void removeObserver(OrderObserver observer) {
         observers.remove(observer);
     }
 
-    // Notify all observers about the status update
     public void notifyObservers() {
         for (OrderObserver observer : observers) {
             observer.update(state.getStatus(), pizza);
         }
     }
 
-    // Set a new state
     public void setState(OrderState state) {
         this.state = state;
-        notifyObservers(); // Notify observers on state change
+        notifyObservers();
     }
 
-    // Transition to the next state
     public void nextState() {
         state.handleState(this);
     }

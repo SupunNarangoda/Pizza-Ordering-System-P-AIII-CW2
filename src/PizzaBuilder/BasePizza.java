@@ -16,8 +16,7 @@ public class BasePizza implements Pizza {
     private static final Map<String, Double> saucePrices = new HashMap<>();
     private static final Map<String, Double> toppingPrices = new HashMap<>();
     private static final Map<String, Double> cheesePrices = new HashMap<>();
-//    private static final double BASE_PRICE = 5.0;
-//    private static final double CHEESE_PRICE = 1.5;
+
 
     static {
 

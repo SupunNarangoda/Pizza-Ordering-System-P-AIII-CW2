@@ -88,29 +88,29 @@ public class Main {
         cheeseHandler.setNextHandler(extraToppingHandler);
         extraToppingHandler.setNextHandler(sizeHandler);
 
-        //crust handler
-        System.out.println("Select crust (Thin, Thick, Stuffed): ");
-        String crust = scanner.nextLine();
+        // Crust handler
+        System.out.println("Select crust:\n1. Thin\n2. Thick\n3. Stuffed");
+        String crust = handleSelection(scanner, new String[]{"Thin", "Thick", "Stuffed"});
         crustHandler.handleRequest(crust, pizzaBuilder);
 
-        //sauce handler
-        System.out.println("Select sauce (Tomato, Alfredo, Barbecue): ");
-        String sauce = scanner.nextLine();
+        // Sauce handler
+        System.out.println("Select sauce:\n1. Tomato\n2. Alfredo\n3. Barbecue");
+        String sauce = handleSelection(scanner, new String[]{"Tomato", "Alfredo", "Barbecue"});
         crustHandler.handleRequest(sauce, pizzaBuilder);
 
-        //Basic Topings handler
-        System.out.println("Select Topping (Olives, Capsicum, Pepperoni): ");
-        String toppings = scanner.nextLine();
+        // Basic Toppings handler
+        System.out.println("Select topping:\n1. Olives\n2. Capsicum\n3. Pepperoni");
+        String toppings = handleSelection(scanner, new String[]{"Olives", "Capsicum", "Pepperoni"});
         basicToppingHandler.handleRequest(toppings, pizzaBuilder);
 
-        //cheese handler
-        System.out.println("Select cheese (Mozzarella, Parmesan): ");
-        String cheese = scanner.nextLine();
+        // Cheese handler
+        System.out.println("Select cheese:\n1. Mozzarella\n2. Parmesan");
+        String cheese = handleSelection(scanner, new String[]{"Mozzarella", "Parmesan"});
         cheeseHandler.handleRequest(cheese, pizzaBuilder);
 
-        //size handler
-        System.out.println("Select size (Regular, Medium,Large): ");
-        String size = scanner.nextLine();
+        // Size handler
+        System.out.println("Select size:\n1. Regular\n2. Medium\n3. Large");
+        String size = handleSelection(scanner, new String[]{"Regular", "Medium", "Large"});
         sizeHandler.handleRequest(size, pizzaBuilder);
 
         //extra topping handler
@@ -141,6 +141,7 @@ public class Main {
         return customPizza;
 
     }
+
     private static void orderCustomPizza(Scanner scanner, UserProfile userProfile, CommandInvoker commandInvoker, LoyaltyProgram loyaltyProgram, FeedbackManager feedbackManager){
         Pizza customPizza = buildPizza(scanner);
 
@@ -297,6 +298,23 @@ public class Main {
         String decision = scanner.nextLine();
         if (decision.equalsIgnoreCase("no")) {
             commandInvoker.undoLastCommand();
+        }
+    }
+    private static String handleSelection(Scanner scanner, String[] options) {
+        int choice;
+        while (true) {
+            System.out.print("Enter the number of your choice: ");
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                if (choice > 0 && choice <= options.length) {
+                    return options[choice - 1];
+                } else {
+                    System.out.println("Invalid choice. Please select a number between 1 and " + options.length + ".");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.next();
+            }
         }
     }
 
