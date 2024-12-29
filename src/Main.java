@@ -150,7 +150,7 @@ public class Main {
 
 
         Order order = new Order(customPizza);
-        order.addObserver(new AppNotification());
+        order.addObserver(new Notification());
         commandInvoker.executeCommand(new OrderCommand(order,loyaltyProgram));
 
         System.out.print("Would you like to process with the order? (yes/no): ");
@@ -175,7 +175,7 @@ public class Main {
 
 
             Order orderFav = new Order(favoritePizza);
-            orderFav.addObserver(new AppNotification());
+            orderFav.addObserver(new Notification());
 
             commandInvoker.executeCommand(new OrderCommand(orderFav,loyaltyProgram));
 
@@ -222,7 +222,7 @@ public class Main {
         if (scanner.nextLine().equalsIgnoreCase("yes")) {
             for (Pizza pizza : cart) {
                 Order order = new Order(pizza);
-                order.addObserver(new AppNotification());
+                order.addObserver(new Notification());
                 commandInvoker.executeCommand(new OrderCommand(order, loyaltyProgram));
                 simulateTracking(order);
             }
@@ -254,7 +254,7 @@ public class Main {
 
         Pizza selectedPizza = topRatedPizzas.get(choice - 1);
         Order order = new Order(selectedPizza);
-        order.addObserver(new AppNotification());
+        order.addObserver(new Notification());
         commandInvoker.executeCommand(new OrderCommand(order, loyaltyProgram));
 
         simulateTracking(order);
