@@ -88,28 +88,23 @@ public class Main {
         cheeseHandler.setNextHandler(extraToppingHandler);
         extraToppingHandler.setNextHandler(sizeHandler);
 
-        // Crust handler
-        System.out.println("Select crust:\n1. Thin\n2. Thick\n3. Stuffed");
+        //crust handler
         String crust = handleSelection(scanner, new String[]{"Thin", "Thick", "Stuffed"});
         crustHandler.handleRequest(crust, pizzaBuilder);
 
-        // Sauce handler
-        System.out.println("Select sauce:\n1. Tomato\n2. Alfredo\n3. Barbecue");
+        //sauce handler
         String sauce = handleSelection(scanner, new String[]{"Tomato", "Alfredo", "Barbecue"});
         crustHandler.handleRequest(sauce, pizzaBuilder);
 
-        // Basic Toppings handler
-        System.out.println("Select topping:\n1. Olives\n2. Capsicum\n3. Pepperoni");
+        //basic Toppings handler
         String toppings = handleSelection(scanner, new String[]{"Olives", "Capsicum", "Pepperoni"});
         basicToppingHandler.handleRequest(toppings, pizzaBuilder);
 
-        // Cheese handler
-        System.out.println("Select cheese:\n1. Mozzarella\n2. Parmesan");
+        //cheese handler
         String cheese = handleSelection(scanner, new String[]{"Mozzarella", "Parmesan"});
         cheeseHandler.handleRequest(cheese, pizzaBuilder);
 
-        // Size handler
-        System.out.println("Select size:\n1. Regular\n2. Medium\n3. Large");
+        //size handler
         String size = handleSelection(scanner, new String[]{"Regular", "Medium", "Large"});
         sizeHandler.handleRequest(size, pizzaBuilder);
 
@@ -302,27 +297,26 @@ public class Main {
     }
     private static String handleSelection(Scanner scanner, String[] options) {
         int choice = -1;
+        System.out.println("Please select one of the following options:");
+        for (int i = 0; i < options.length; i++) {
+            System.out.println((i + 1) + ". " + options[i]);
+        }
 
         while (true) {
-            System.out.println("Please select one of the following options:");
-            for (int i = 0; i < options.length; i++) {
-                System.out.println((i + 1) + ". " + options[i]);
-            }
             System.out.print("Enter the number of your choice: ");
 
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
 
-
                 if (choice > 0 && choice <= options.length) {
                     String selectedOption = options[choice - 1];
-                    System.out.println("Great choice! You selected: " + selectedOption + "\n");
+                    System.out.println("You selected: " + selectedOption + "\n");
                     return selectedOption;
                 } else {
-                    System.out.println("Oops! That number doesn't match any option. Please try again.");
+                    System.out.println("That number doesn't match any option. Please try again.");
                 }
             } else {
-                System.out.println("Hmm, that doesn't look like a number. Please enter a number from the list.");
+                System.out.println("Please enter a number from the list.");
                 scanner.next();
             }
 
