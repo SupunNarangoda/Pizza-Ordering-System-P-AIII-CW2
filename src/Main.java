@@ -89,26 +89,27 @@ public class Main {
         extraToppingHandler.setNextHandler(sizeHandler);
 
         //crust handler
-        String crust = handleSelection(scanner, new String[]{"Thin", "Thick", "Stuffed"});
+        String crust = listAndChooseSelection(scanner, new String[]{"Thin", "Thick", "Stuffed"});
         crustHandler.handleRequest(crust, pizzaBuilder);
 
         //sauce handler
-        String sauce = handleSelection(scanner, new String[]{"Tomato", "Alfredo", "Barbecue"});
+        String sauce = listAndChooseSelection(scanner, new String[]{"Tomato", "Alfredo", "Barbecue"});
         crustHandler.handleRequest(sauce, pizzaBuilder);
 
         //basic Toppings handler
-        String toppings = handleSelection(scanner, new String[]{"Olives", "Capsicum", "Pepperoni"});
+        String toppings = listAndChooseSelection(scanner, new String[]{"Olives", "Capsicum", "Pepperoni"});
         basicToppingHandler.handleRequest(toppings, pizzaBuilder);
 
         //cheese handler
-        String cheese = handleSelection(scanner, new String[]{"Mozzarella", "Parmesan"});
+        String cheese = listAndChooseSelection(scanner, new String[]{"Mozzarella", "Parmesan"});
         cheeseHandler.handleRequest(cheese, pizzaBuilder);
 
         //size handler
-        String size = handleSelection(scanner, new String[]{"Regular", "Medium", "Large"});
+        String size = listAndChooseSelection(scanner, new String[]{"Regular", "Medium", "Large"});
         sizeHandler.handleRequest(size, pizzaBuilder);
 
         //extra topping handler
+        scanner.nextLine();
         System.out.println("Would you like some extra toppings (yes/no): ");
         String extraTopping = scanner.nextLine();
         if(extraTopping.equalsIgnoreCase("yes")) {
@@ -244,7 +245,7 @@ public class Main {
         }
 
         System.out.print("Choose a pizza to order (Select Number): ");
-        int choice = Integer.parseInt(scanner.nextLine());
+        int choice = scanner.nextInt();
 
         if (choice < 1 || choice > topRatedPizzas.size()) {
             System.out.println("Invalid choice.");
@@ -295,7 +296,7 @@ public class Main {
             commandInvoker.undoLastCommand();
         }
     }
-    private static String handleSelection(Scanner scanner, String[] options) {
+    private static String listAndChooseSelection(Scanner scanner, String[] options) {
         int choice = -1;
         System.out.println("Please select one of the following options:");
         for (int i = 0; i < options.length; i++) {
@@ -310,7 +311,6 @@ public class Main {
 
                 if (choice > 0 && choice <= options.length) {
                     String selectedOption = options[choice - 1];
-                    System.out.println("You selected: " + selectedOption + "\n");
                     return selectedOption;
                 } else {
                     System.out.println("That number doesn't match any option. Please try again.");
