@@ -50,19 +50,17 @@ public class FeedbackManager {
             }
         }
     }
-    public List<Pizza> getTopRatedPizzas() {
-        List<Pizza> topPizzas = new ArrayList<>();
+    public List<Map.Entry<Pizza, Double>>getTopRatedPizzas() {
         Map<Pizza, Double> pizzaRatings = new HashMap<>();
 
-        // Collect ratings for pizzas
         for (Feedback feedback : feedbackList) {
             Pizza pizza = feedback.getPizza();
             pizzaRatings.put(pizza, getAverageRating(pizza));
         }
 
 
-
         List<Map.Entry<Pizza, Double>> sortedList = new ArrayList<>(pizzaRatings.entrySet());
+
         // bubble sort which lists top pizza from highest to lowest rating
         for (int i = 0; i < sortedList.size(); i++) {
             for (int j = i + 1; j < sortedList.size(); j++) {
@@ -73,10 +71,7 @@ public class FeedbackManager {
                 }
             }
         }
-        for (Map.Entry<Pizza, Double> entry : sortedList) {
-            topPizzas.add(entry.getKey());
-        }
 
-        return topPizzas;
+        return sortedList;
     }
 }

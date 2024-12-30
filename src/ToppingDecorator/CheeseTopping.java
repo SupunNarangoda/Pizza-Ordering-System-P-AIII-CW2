@@ -8,7 +8,7 @@ public class CheeseTopping extends Toppings {
 
     @Override
     public String getDescription() {
-        return pizza.getDescription() + ", Cheese";
+        return pizza.getDescription() + ", Extra Cheese";
     }
 
     @Override

@@ -8,7 +8,7 @@ public class PepperoniTopping extends Toppings {
 
     @Override
     public String getDescription() {
-        return pizza.getDescription() + ", Pepperoni";
+        return pizza.getDescription() + ", Extra Pepperoni";
     }
 
     @Override

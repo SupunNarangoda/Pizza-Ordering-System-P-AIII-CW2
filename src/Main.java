@@ -4,6 +4,7 @@ import OrderObserver.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import Command.*;
 import  CustomizationHandler.*;
@@ -18,7 +19,7 @@ public class Main {
         FeedbackManager feedbackManager = new FeedbackManager();
 
 
-        System.out.println("Welcome to Pizza Shop!");
+        System.out.println("...........Welcome to Pizza Shop.............");
         boolean exit = false;
 
         while (!exit) {
@@ -67,6 +68,7 @@ public class Main {
                     System.out.println("Invalid choice. Try again.");
             }
         }
+        System.out.println("You have exited the system");
         scanner.close();
 
     }
@@ -232,7 +234,7 @@ public class Main {
     }
 
     private static void orderTopPizza(Scanner scanner, FeedbackManager feedbackManager, CommandInvoker commandInvoker, LoyaltyProgram loyaltyProgram){
-        List<Pizza> topRatedPizzas = feedbackManager.getTopRatedPizzas();
+        List<Map.Entry<Pizza, Double>> topRatedPizzas = feedbackManager.getTopRatedPizzas();
 
         if (topRatedPizzas.isEmpty()) {
             System.out.println("No top rated pizzas available at the moment.");
@@ -241,7 +243,7 @@ public class Main {
 
         System.out.println("\nTop Rated Pizzas:");
         for (int i = 0; i < topRatedPizzas.size(); i++) {
-            System.out.println((i + 1) + ". " + topRatedPizzas.get(i).getDescription());
+            System.out.println((i + 1) + ". Rated at " + topRatedPizzas.get(i).getValue()+ " stars : " + topRatedPizzas.get(i).getKey().getDescription());
         }
 
         System.out.print("Choose a pizza to order (Select Number): ");
@@ -252,7 +254,7 @@ public class Main {
             return;
         }
 
-        Pizza selectedPizza = topRatedPizzas.get(choice - 1);
+        Pizza selectedPizza = topRatedPizzas.get(choice - 1).getKey();
         Order order = new Order(selectedPizza);
         order.addObserver(new Notification());
         commandInvoker.executeCommand(new OrderCommand(order, loyaltyProgram));

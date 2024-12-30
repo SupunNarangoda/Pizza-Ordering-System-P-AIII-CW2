@@ -8,7 +8,7 @@ public class MushroomTopping extends Toppings {
 
     @Override
     public String getDescription() {
-        return pizza.getDescription() + ", Mushrooms";
+        return pizza.getDescription() + ", Extra Mushrooms";
     }
 
     @Override
