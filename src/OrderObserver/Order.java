@@ -11,6 +11,7 @@ public class Order {
     private List<OrderObserver> observers = new ArrayList<>();
     private OrderState state;
     private Pizza pizza;
+    private String deliveryOption;
 
     public Order(Pizza pizza) {
         this.pizza = pizza;
@@ -34,6 +35,13 @@ public class Order {
     public void setState(OrderState state) {
         this.state = state;
         notifyObservers();
+    }
+    public void setDeliveryOption(String option) {
+        this.deliveryOption = option;
+    }
+
+    public String getDeliveryOption() {
+        return deliveryOption;
     }
 
     public void nextState() {

@@ -9,6 +9,7 @@ import java.util.Scanner;
 import Command.*;
 import  CustomizationHandler.*;
 import Feedback.*;
+import State.OutforDeliveryState;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,7 +20,7 @@ public class Main {
         FeedbackManager feedbackManager = new FeedbackManager();
 
 
-        System.out.println("...........Welcome to Pizza Shop.............");
+        System.out.println("...........Welcome to the Pizza Ordering System.............");
         boolean exit = false;
 
         while (!exit) {
@@ -160,7 +161,8 @@ public class Main {
         if (cancel.equalsIgnoreCase("no")) {
             commandInvoker.undoLastCommand();
         } else if (cancel.equalsIgnoreCase("yes")) {
-            simulateTracking(order);
+            processDelivery(scanner,order);
+//            simulateTracking(order);
         }
 
         getFeedback(scanner,commandInvoker, order, feedbackManager);
@@ -186,7 +188,9 @@ public class Main {
             if (cancel2.equalsIgnoreCase("no")) {
                 commandInvoker.undoLastCommand();
             }else if(cancel2.equalsIgnoreCase("yes")){
-                simulateTracking(orderFav);
+                processDelivery(scanner,orderFav);
+
+//                simulateTracking(orderFav);
             }
 
 
@@ -226,7 +230,9 @@ public class Main {
                 Order order = new Order(pizza);
                 order.addObserver(new Notification());
                 commandInvoker.executeCommand(new OrderCommand(order, loyaltyProgram));
-                simulateTracking(order);
+                processDelivery(scanner,order);
+
+//                simulateTracking(order);
             }
         } else {
             System.out.println("Order has been canceled.");
@@ -259,7 +265,8 @@ public class Main {
         order.addObserver(new Notification());
         commandInvoker.executeCommand(new OrderCommand(order, loyaltyProgram));
 
-        simulateTracking(order);
+        processDelivery(scanner,order);
+//        simulateTracking(order);
         getFeedback(scanner,commandInvoker, order, feedbackManager);
     }
 
@@ -323,6 +330,38 @@ public class Main {
             }
 
             System.out.println();
+        }
+    }
+    private static void processDelivery(Scanner scanner,Order order) {
+        String deliveryOption;
+        while (true) {
+            System.out.println("\nSelect the mode of Delivery:\n1. Delivery\n2. Pickup");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            if (choice == 1) {
+                deliveryOption = "Delivery";
+                order.setDeliveryOption(deliveryOption);
+                break;
+            } else if (choice == 2) {
+                deliveryOption = "Pickup";
+                order.setDeliveryOption(deliveryOption);
+                break;
+            } else {
+                System.out.println("Invalid choice. Select one of the above options");
+            }
+        }
+        if (deliveryOption.equalsIgnoreCase("Delivery")) {
+            System.out.println("\nYou have chosen "+ order.getDeliveryOption() + "as the mode of Delivery. Please provide the following details:");
+
+            System.out.print("Enter your delivery address: ");
+            String address = scanner.nextLine();
+
+            System.out.print("Enter your phone number: ");
+            String phoneNumber = scanner.nextLine();
+
+            simulateTracking(order);
+        } else {
+            System.out.println("\nYou have chosen "+ order.getDeliveryOption() + ". Your pizza will be ready for picked up.");
         }
     }
 
