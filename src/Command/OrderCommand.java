@@ -25,16 +25,15 @@ public class OrderCommand implements Command {
     public void execute() {
         Scanner scanner = new Scanner(System.in);
 
-        // Check if the user wants to use loyalty points
         if(loyaltyProgram.getPoints() > 0) {
             System.out.println("You have " + loyaltyProgram.getPoints() + " loyalty points.");
             System.out.print("Would you like to use your loyalty points to reduce the cost? (yes/no): ");
             int loyaltyPointsUsed = 0;
             if (scanner.nextLine().equalsIgnoreCase("yes")) {
                 loyaltyPointsUsed = Math.min(loyaltyProgram.getPoints(), (int) order.getPizza().getCost());
-                loyaltyProgram.addPoints(-loyaltyPointsUsed); // Deduct points
+                loyaltyProgram.addPoints(-loyaltyPointsUsed); //deduct points
             }
-            // Calculates the final cost after applying loyalty points
+            //calculates the final cost after applying loyalty points
              finalCost = order.getPizza().getLoyaltyCost(loyaltyPointsUsed,order.getPizza().getCost());
             System.out.println("Final Cost after applying loyalty points: $" + finalCost);
         }else{
@@ -44,7 +43,7 @@ public class OrderCommand implements Command {
 
 
         System.out.println("Select Payment Method: 1. Credit Card 2. Digital Wallet");
-        int paymentChoice = Integer.parseInt(scanner.nextLine());
+        int paymentChoice = scanner.nextInt();
 
         PaymentContext paymentContext = new PaymentContext();
         if (paymentChoice == 1) {
@@ -54,12 +53,10 @@ public class OrderCommand implements Command {
         }
 
 
-        paymentContext.pay(order.getPizza().getCost());
-//        paymentContext.pay(finalCost);
+        paymentContext.pay(finalCost);
 
 
         System.out.println("Order placed successfully for: " + order.getPizza().getDescription());
-//        order.setStatus("Placed");
 
         loyaltyProgram.addPoints((int) order.getPizza().getCost());
         System.out.println("Loyalty points added. Total points: " + loyaltyProgram.getPoints());

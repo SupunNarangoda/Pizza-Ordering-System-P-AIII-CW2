@@ -13,7 +13,7 @@ public class PepperoniTopping extends Toppings {
 
     @Override
     public double getCost() {
-        return pizza.getCost() + 2.0; // Cost of pepperoni
+        return pizza.getCost() + 2.0; //cost of pepperoni
     }
 
     @Override
