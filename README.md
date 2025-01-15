@@ -1,4 +1,4 @@
-# Pizza Ordering System  (CI6115 CW1)
+# Pizza Ordering System  (CI6115 CW2)
 
 This project is a comprehensive software solution designed to streamline the pizza ordering process for a pizza shop. It offers a seamless and intuitive experience for customers, allowing them to customize pizzas, track orders in real time, and enjoy exclusive promotions.  
 
